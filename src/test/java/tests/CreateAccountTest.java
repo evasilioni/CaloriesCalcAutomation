@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.HomePageFactory;
+import pages.RegisterPageFactory;
 import utilities.DriverFactory;
 
 import java.rmi.NoSuchObjectException;
@@ -23,17 +25,23 @@ public class CreateAccountTest {
 
     WebDriver driver;
 
+    RegisterPageFactory registerPage;
+    HomePageFactory homePage;
+
     @BeforeMethod
-    public void setUp() throws NoSuchObjectException {
+    public void setUp(){
         String webUrl = "http://calories-calc.herokuapp.com/";
 
         driver = DriverFactory.open("chrome");
         driver.get(webUrl);
+
+        registerPage = new RegisterPageFactory(driver);
+        homePage = new HomePageFactory(driver);
     }
 
     @AfterMethod
     public void tearDown(){
-//        driver.quit();
+        driver.quit();
     }
 
     @Test
@@ -41,25 +49,15 @@ public class CreateAccountTest {
         // Generate a random email
         final String randomEmail = randomEmail();
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement registerBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Register')]")));
-        registerBtn.click();
+        registerPage.register();
+        assertThat(registerPage.getHeaderRegistration(), containsString("Create account"));
 
-        String headerRegistration = driver.findElement(By.tagName("h3")).getText();
-        assertThat(headerRegistration, containsString("Create account"));
+        registerPage.setUserNameInputField("John UnitTest Doe");
+        registerPage.setEmailInputField(randomEmail);
+        registerPage.setPasswordInputField("P@ssw0rd");
+        registerPage.setPasswordConfirmationInputField("P@ssw0rd");
 
-        WebElement userName = driver.findElement(By.id("name-input"));
-        WebElement userEmail = driver.findElement(By.id("email-input"));
-        WebElement password = driver.findElement(By.id("password-input"));
-        WebElement passwordConfirmation = driver.findElement(By.id("password-confirmation-input"));
-
-        userName.clear();
-        userName.sendKeys("John Doe");
-        userEmail.sendKeys(randomEmail);
-        password.sendKeys("P@ssw0rd");
-        passwordConfirmation.sendKeys("P@ssw0rd");
-
-        driver.findElement(By.xpath("//input[@value='Join']")).click();
+        registerPage.join();
 
         // Check the sign up succeeded by checking that the user name
         // appears in the website's header bar.
@@ -76,22 +74,14 @@ public class CreateAccountTest {
         // Generate a random email
         final String randomEmail = randomEmail();
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement registerBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Register')]")));
-        registerBtn.click();
+        registerPage.register();
+        assertThat(registerPage.getHeaderRegistration(), containsString("Create account"));
 
-        String headerRegistration = driver.findElement(By.tagName("h3")).getText();
-        assertThat(headerRegistration, containsString("Create account"));
+        registerPage.setEmailInputField(randomEmail);
+        registerPage.setPasswordInputField("P@ssw0rd");
+        registerPage.setPasswordConfirmationInputField("P@ssw0rd");
 
-        WebElement userEmail = driver.findElement(By.id("email-input"));
-        WebElement password = driver.findElement(By.id("password-input"));
-        WebElement passwordConfirmation = driver.findElement(By.id("password-confirmation-input"));
-
-        userEmail.sendKeys(randomEmail);
-        password.sendKeys("P@ssw0rd");
-        passwordConfirmation.sendKeys("P@ssw0rd");
-
-        driver.findElement(By.xpath("//input[@value='Join']")).click();
+        registerPage.join();
 
         assertThat(isElementPresent(By.cssSelector("header[data-ui=\"greeting\"]")), equalTo(false));
     }

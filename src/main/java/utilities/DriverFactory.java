@@ -16,7 +16,7 @@ public class DriverFactory {
     private static final String FIREFOX = "firefox";
     private static final String IE = "ie";
 
-    public static WebDriver open(String browserType) throws NoSuchObjectException {
+    public static WebDriver open(String browserType){
         Properties properties = new Properties();
         try(InputStream inputStream = DriverFactory.class.getClassLoader().getResourceAsStream("config.properties")){
             properties.load(inputStream);
@@ -33,8 +33,7 @@ public class DriverFactory {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return null;
         }
-
-        throw new NoSuchObjectException("Unable to find driver for " + browserType);
     }
 }
