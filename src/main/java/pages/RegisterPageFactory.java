@@ -15,12 +15,6 @@ public class RegisterPageFactory{
     @FindBy(id ="name-input")
     WebElement userNameInputField;
 
-    @FindBy(id ="email-input")
-    WebElement emailInputField;
-
-    @FindBy(id="password-input")
-    WebElement passwordInputField;
-
     @FindBy(id="password-confirmation-input")
     WebElement passwordConfirmationInputField;
 
@@ -40,14 +34,6 @@ public class RegisterPageFactory{
 
     public void setUserNameInputField(String userName) {
         userNameInputField.sendKeys(userName);
-    }
-
-    public void setEmailInputField(String email) {
-        emailInputField.sendKeys(email);
-    }
-
-    public void setPasswordInputField(String password) {
-        passwordInputField.sendKeys(password);
     }
 
     public void setPasswordConfirmationInputField(String passwordConfirmation) {

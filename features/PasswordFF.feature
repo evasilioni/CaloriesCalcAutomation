@@ -10,7 +10,7 @@ Feature: Password should be at least 8 characters
     Then Navigate to Register Page
     And User enters username
     And User enters email
-    And user enters password
+    And User enters password
     And User enters confirm password
     And User clicks Join
     Then Navigate to Home Page

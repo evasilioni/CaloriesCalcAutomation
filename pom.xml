@@ -20,15 +20,6 @@
         </plugins>
     </build>
 
-
-    <!--<properties>-->
-        <!--<test.username>${test.username}</test.username>-->
-        <!--<test.email>${test.email}</test.email>-->
-        <!--<test.password>${test.password}</test.password>-->
-
-        <!--<site.url>${site.url}</site.url>-->
-    <!--</properties>-->
-
     <dependencies>
         <dependency>
             <groupId>org.testng</groupId>
@@ -76,6 +67,24 @@
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-picocontainer</artifactId>
             <version>1.2.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-path</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.7</version>
         </dependency>
 
     </dependencies>
