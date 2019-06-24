@@ -1,9 +1,5 @@
 package stepImplementations;
 
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.Given;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utilities.DriverFactory;
 
@@ -11,8 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AbstractPageStepDefinition {
 

@@ -10,5 +10,5 @@ exceeded in Edibles section a validation message should be displayed.
 In order to execute the tests please follow the instructions,:
 1. git clone <Project path on GitHub>
 2. install maven locally
-3. run : mvn clean compile package -DskipTests=true (to build the project)
+3. run : mvn clean install -DskipTests=true (to build the project)
 4. run : mvn test (to execute test scripts)
